@@ -1,0 +1,3 @@
+class Orange {
+    constructor()
+}
