@@ -8,6 +8,7 @@ class Game {
     this.gameWidth = 800;
     this.isGameOn = true;
     this.timerInterval;
+    this.seconds = 0;
   }
 
   removeOrange = (orange) => {
@@ -17,11 +18,10 @@ class Game {
     }
   };
 
-  lifeLost = () => {
-    if (this.playerOrangeCollision === true) {
-      this.player.lives -= 1; // or -1? I think -- may be better
-      console.log("lives -1");
-    }
+  drawSeconds = () => {
+    ctx.font = "30px Arial";
+    //ctx.fillStyle = #ed1667;
+    ctx.fillText(this.seconds, 50, 50);
   };
 
   // now for the oranges
@@ -54,8 +54,8 @@ class Game {
   };
 
   gameOverCheck = () => {
+    console.log("gameover check", this.player.lives);
     if (this.player.lives < 1) {
-      console.log("gameover check");
       this.isGameOn = false;
       canvas.style.display = "none";
       gameoverScreen.style.display = "flex";
@@ -64,7 +64,7 @@ class Game {
 
   startTimer = () => {
     clearInterval(this.timerInterval);
-    
+
     let timeString = "";
     let second = 0,
       minute = 0,
@@ -99,12 +99,13 @@ class Game {
     }, 1000);
   };
 
-  gameLoop = () => {
+  gameLoop = (fixedTimestamp = 0) => {
     // 1 clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     //console.log("boo!")
 
     // 2 movement of elements or other actions
+    //this.startTimer();
     this.orangesArr.forEach((eachOrange) => {
       eachOrange.moveOrange();
     });
@@ -115,22 +116,29 @@ class Game {
       if (this.player.playerOrangeCollision(eachOrange)) {
         // this orange, so 'eachOrange' must be removed from the array
         this.removeOrange(eachOrange);
+        this.player.lives--;
+        this.gameOverCheck();
       }
     });
-    this.lifeLost();
-    this.gameOverCheck();
-    this.startTimer();
 
     // filter out oranges
 
     // 3 drawing elements
     ctx.drawImage(this.background, 0, 0, this.gameWidth, this.gameHeight);
     this.player.drawPlayer();
+    this.drawSeconds();
     //this.spawnOranges(); //-> will make thousands of oranges
     this.drawOranges();
     // 4 request animation frame
     if (this.isGameOn) {
-      requestAnimationFrame(this.gameLoop);
+      requestAnimationFrame((timestamp) => {
+        //console.log(this.seconds);
+        if (timestamp - fixedTimestamp > 1000) {
+          this.seconds++;
+          fixedTimestamp = timestamp;
+        }
+        this.gameLoop(fixedTimestamp);
+      });
     }
   };
 
@@ -141,17 +149,17 @@ class Game {
         event.code === "ArrowDown" &&
         this.player.y + this.player.height < canvas.height
       ) {
-        this.player.y += 25;
+        this.player.y += 30;
       } else if (event.code === "ArrowUp" && this.player.y > 0) {
         //console.log("arrow up");
-        this.player.y -= 25;
+        this.player.y -= 30;
       } else if (event.code === "ArrowLeft" && this.player.x > 0) {
-        this.player.x -= 25;
+        this.player.x -= 30;
       } else if (
         event.code === "ArrowRight" &&
         this.player.x + this.player.width < canvas.width
       ) {
-        this.player.x += 25;
+        this.player.x += 30;
       }
     });
   };

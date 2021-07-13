@@ -5,6 +5,7 @@ const ctx = canvas.getContext("2d");
 let startButton = document.querySelector("#start-btn");
 let restartButton = document.querySelector("#restart-btn");
 let splashScreen = document.querySelector("#splash-screen");
+let gameoverScreen = document.querySelector("#gameover-screen");
 let timer = document.querySelector("#timer");
 let gameObj;
 

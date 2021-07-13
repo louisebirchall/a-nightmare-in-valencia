@@ -5,7 +5,7 @@ class Player {
     this.width = 10;
     this.height = 20;
     this.image = new Image();
-    this.image.src = "../images/palmtree.png"; // player pic incoming
+    this.image.src = "../images/playerfl.PNG"; // change pic for players?
     this.lives = 3;
     //this.lives.image = new Image()
     //this.lives.image.src = "../images/pngaaa.com-10153.png";
@@ -36,4 +36,12 @@ class Player {
       console.log("lives -1");
     }
   };*/
+
+   lifeLost = (/* lives?*/) => {
+    if (this.playerOrangeCollision === true) {
+        console.log("life lost")
+      this.player.lives -= 1; // or -1? I think -- may be better
+      console.log("lives -1");
+    }
+  };
 }
