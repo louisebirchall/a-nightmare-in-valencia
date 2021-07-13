@@ -1,0 +1,36 @@
+#start-btn, #restart-btn {
+  background-color: #ed1667;
+  color: white;
+  padding: 20px;
+  font-size: 20px;
+  margin-top: 40px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#my-canvas {
+  display: none;
+  border: 1px solid #ed1667;
+}
+
+#lives {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+}
+
+#gameover-screen {
+    display: none;
+    border: 1px solid orange;
+}
+
+#timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 3rem;
+}

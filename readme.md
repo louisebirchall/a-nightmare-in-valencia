@@ -20,7 +20,10 @@ MVP (DOM, Canvas)
 
 Backlog
 
-Everything bar initial setup at time of writing
+Stop player going off the right edge
+Spawn and move oranges
+Add time limit to oranges 
+
 
 
 Data structure
