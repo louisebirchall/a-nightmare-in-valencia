@@ -19,9 +19,9 @@ class Game {
   };
 
   drawSeconds = () => {
+    ctx.fillStyle = "#ed1667";
     ctx.font = "30px Arial";
-    //ctx.fillStyle = #ed1667;
-    ctx.fillText(this.seconds, 50, 50);
+    ctx.fillText(this.seconds, 35, 50);
   };
 
   // now for the oranges
@@ -60,43 +60,6 @@ class Game {
       canvas.style.display = "none";
       gameoverScreen.style.display = "flex";
     }
-  };
-
-  startTimer = () => {
-    clearInterval(this.timerInterval);
-
-    let timeString = "";
-    let second = 0,
-      minute = 0,
-      odd = false;
-
-    this.timerInterval = setInterval(() => {
-      odd = !odd;
-      if (odd) {
-        timer.classList.add("odd");
-      } else {
-        timer.classList.remove("odd");
-      }
-
-      if (minute < 10) {
-        timeString += "0" + minute;
-      } else {
-        timeString += minute;
-      }
-      if (second < 10) {
-        timeString += ":0" + second;
-      } else {
-        timeString += ":" + second;
-      }
-      timer.innerHTML = timeString;
-
-      second++;
-
-      if (second == 60) {
-        minute++;
-        second = 0;
-      }
-    }, 1000);
   };
 
   gameLoop = (fixedTimestamp = 0) => {
@@ -147,7 +110,7 @@ class Game {
       //console.log(event.code)
       if (
         event.code === "ArrowDown" &&
-        this.player.y + this.player.height < canvas.height
+        this.player.y + (this.player.height +10) < canvas.height // I don't get how to stop them going off the ege to the right and bottom
       ) {
         this.player.y += 30;
       } else if (event.code === "ArrowUp" && this.player.y > 0) {
@@ -157,7 +120,7 @@ class Game {
         this.player.x -= 30;
       } else if (
         event.code === "ArrowRight" &&
-        this.player.x + this.player.width < canvas.width
+        this.player.x + this.player.width + 10 < canvas.width
       ) {
         this.player.x += 30;
       }

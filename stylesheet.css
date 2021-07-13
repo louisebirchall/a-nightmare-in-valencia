@@ -1,9 +1,12 @@
-#start-btn, #restart-btn {
+#start-btn,
+#restart-btn {
   background-color: #ed1667;
   color: white;
   padding: 20px;
   font-size: 20px;
   margin-top: 40px;
+  position: absolute;
+  left: 42%;
 }
 
 .container {
@@ -14,23 +17,18 @@
 
 #my-canvas {
   display: none;
+  margin: auto;
+  width: auto;
   border: 1px solid #ed1667;
 }
 
 #lives {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
 }
 
 #gameover-screen {
-    display: none;
-    border: 1px solid orange;
-}
-
-#timer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: 3rem;
+  display: none;
+  border: 1px solid orange;
 }

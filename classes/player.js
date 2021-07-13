@@ -30,18 +30,5 @@ class Player {
     return false;
   };
 
-  /* lifeLost = () => {
-    if (this.playerOrangeCollision === true) {
-      this.player.lives - 1; // or -1? I think -- may be better
-      console.log("lives -1");
-    }
-  };*/
-
-   lifeLost = (/* lives?*/) => {
-    if (this.playerOrangeCollision === true) {
-        console.log("life lost")
-      this.player.lives -= 1; // or -1? I think -- may be better
-      console.log("lives -1");
-    }
-  };
+ 
 }
