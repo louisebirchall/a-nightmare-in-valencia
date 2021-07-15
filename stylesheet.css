@@ -6,7 +6,7 @@
   font-size: 20px;
   margin-top: 40px;
   position: absolute;
-  left: 42%;
+  left: 46%;
 }
 
 .container {
@@ -22,13 +22,16 @@
   border: 1px solid #ed1667;
 }
 
-#lives {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: flex-start;
-}
-
 #gameover-screen {
   display: none;
-  border: 1px solid orange;
+}
+
+#final-score {
+  position: absolute;
+  left: 5%;
+  padding-top: 20px;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 2rem;
+  color: #ed1667;
+  text-shadow: 2px 2px 5px black;
 }

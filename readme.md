@@ -7,7 +7,6 @@ This is the game I'm planning to create for the M1 project.
 Against the background of a lovely Valencian beach, a player is suddenly attacked by a giant orange, followed by more giant oranges.
 The player has to run around escaping the errant citrus for as long as possible.
 
-
 MVP (DOM, Canvas)
 
 - The game has a player who moves in two (four?) directions
@@ -17,14 +16,13 @@ MVP (DOM, Canvas)
 - The player has to avoid the oranges for as long as possible
 - Game over in three collisions
 
-
 Backlog
 
-Stop player going off the right edge
-Spawn and move oranges
-Add time limit to oranges 
-
-
+If time, or in the future:
+Work out bottom collision of player
+Add leaderboard
+Choice of player
+Player image for lafe and right directions
 
 Data structure
 
@@ -55,7 +53,6 @@ move () {}
 checkCollisionButton () {}
 
 // if possible chioce of player, add lives, add timer, add score, add high score screen to game over screen
-
 
 States y States Transitions
 Definition of the different states and their transition (transition functions)

@@ -1,14 +1,15 @@
 class Game {
   constructor() {
     this.background = new Image();
-    this.background.src = "../images/la playa.jpg";
+    this.background.src = "./images/la playa.jpg";
     this.player = new Player();
-    this.orangesArr = [new Orange(), new Orange(), new Orange()];
+    this.orangesArr = [];
     this.gameHeight = 600;
     this.gameWidth = 800;
     this.isGameOn = true;
-    this.timerInterval;
     this.seconds = 0;
+    this.orangeGenerationSpeed = 8000;
+    this.levelUpSpeed = 12000;
   }
 
   removeOrange = (orange) => {
@@ -18,39 +19,29 @@ class Game {
     }
   };
 
+  generateOrange = () => {
+    this.orangesArr.push(new Orange());
+  };
+
   drawSeconds = () => {
+    ctx.font = "30px Arial";
+    ctx.fillText(this.seconds, 35, 60);
     ctx.fillStyle = "#ed1667";
     ctx.font = "30px Arial";
-    ctx.fillText(this.seconds, 35, 50);
+    ctx.fillText("TIME", 15, 30);
+  };
+
+  drawLives = () => {
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "#ed1667";
+    ctx.fillText(this.player.lives, 740, 60);
+    ctx.font = "30px Arial";
+    ctx.fillText("LIVES", 705, 30);
   };
 
   // now for the oranges
   drawOranges = () => {
-    //let orangeAppear = new Orange();
-    //console.log("new orange"); // -> logging
-
-    //this.orangeArr.push(orangeAppear);
-    //console.log("push orange"); //-> logging
-
     this.orangesArr.forEach((orange) => orange.drawOrange());
-  };
-
-  spawnOranges = () => {
-    // *** if the array is empty
-
-    if (
-      !this.orangesArr.length ||
-      this.orangesArr[this.orangesArr.length - 1].y === canvas.width / 2
-    ) {
-    }
-
-    // 1 create an orange - done above in draw oranges
-
-    // 2 add to the array - done above in draw oranges
-
-    // 3 put it in a random position -> in orange
-
-    // 5* make it dissapear after x seconds
   };
 
   gameOverCheck = () => {
@@ -58,17 +49,20 @@ class Game {
     if (this.player.lives < 1) {
       this.isGameOn = false;
       canvas.style.display = "none";
-      gameoverScreen.style.display = "flex";
+      gameoverScreen.style.display = "block";
+      (finalScore.innerText = "TIME BEFORE JUICING: " + this.seconds + "s");
     }
   };
 
-  gameLoop = (fixedTimestamp = 0) => {
+  gameLoop = (
+    fixedTimestamp = 0,
+    orangesTimestamp = 0,
+    levelUpTimestamp = 0
+  ) => {
     // 1 clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //console.log("boo!")
 
     // 2 movement of elements or other actions
-    //this.startTimer();
     this.orangesArr.forEach((eachOrange) => {
       eachOrange.moveOrange();
     });
@@ -84,14 +78,14 @@ class Game {
       }
     });
 
-    // filter out oranges
-
     // 3 drawing elements
     ctx.drawImage(this.background, 0, 0, this.gameWidth, this.gameHeight);
     this.player.drawPlayer();
     this.drawSeconds();
+    this.drawLives();
     //this.spawnOranges(); //-> will make thousands of oranges
     this.drawOranges();
+
     // 4 request animation frame
     if (this.isGameOn) {
       requestAnimationFrame((timestamp) => {
@@ -100,7 +94,15 @@ class Game {
           this.seconds++;
           fixedTimestamp = timestamp;
         }
-        this.gameLoop(fixedTimestamp);
+        if (timestamp - orangesTimestamp > this.orangeGenerationSpeed) {
+          this.generateOrange();
+          orangesTimestamp = timestamp;
+        }
+        if (timestamp - levelUpTimestamp > this.levelUpSpeed) {
+          this.orangeGenerationSpeed *= 0.5;
+          levelUpTimestamp = timestamp;
+        }
+        this.gameLoop(fixedTimestamp, orangesTimestamp, levelUpTimestamp);
       });
     }
   };
@@ -110,7 +112,7 @@ class Game {
       //console.log(event.code)
       if (
         event.code === "ArrowDown" &&
-        this.player.y + (this.player.height +10) < canvas.height // I don't get how to stop them going off the ege to the right and bottom
+        this.player.y + (this.player.height + 20) < canvas.height // I don't get how to stop them going off the ege to the right and bottom
       ) {
         this.player.y += 30;
       } else if (event.code === "ArrowUp" && this.player.y > 0) {

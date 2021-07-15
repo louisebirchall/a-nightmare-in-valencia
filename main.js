@@ -6,6 +6,7 @@ let startButton = document.querySelector("#start-btn");
 let restartButton = document.querySelector("#restart-btn");
 let splashScreen = document.querySelector("#splash-screen");
 let gameoverScreen = document.querySelector("#gameover-screen");
+let finalScore = document.querySelector("#final-score");
 
 // Event listeners
 startButton.addEventListener("click", () => {

@@ -2,10 +2,10 @@ class Player {
   constructor() {
     this.x = 750; // before canvas.width -50
     this.y = 300; // before canvas.height / 2
-    this.width = 10;
-    this.height = 20;
+    this.width = 20;
+    this.height = 40;
     this.image = new Image();
-    this.image.src = "../images/playerfl.PNG"; // change pic for players?
+    this.image.src = "./images/playerfl.PNG"; // change pic for players?
     this.lives = 3;
     //this.lives.image = new Image()
     //this.lives.image.src = "../images/pngaaa.com-10153.png";
@@ -30,5 +30,4 @@ class Player {
     return false;
   };
 
- 
 }

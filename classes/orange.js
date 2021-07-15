@@ -5,7 +5,7 @@ class Orange {
     this.width = 50;
     this.height = 50;
     this.image = new Image();
-    this.image.src = "../images/orange.png";
+    this.image.src = "./images/orange.png";
     this.speed = 1.2;
     this.directionX = Math.floor(Math.random() * 8) - 4;
     this.directionY = Math.floor(Math.random() * 8) - 4;
